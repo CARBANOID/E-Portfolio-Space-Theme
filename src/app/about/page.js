@@ -30,16 +30,16 @@ export default function About() {
             </div>
           </div>
           
-          <div className="space-y-6">
+          <div className="space-y-6">            
             <p className="text-lg text-white/80 leading-relaxed">
-              I'm Sushant Negi, a passionate developer with a strong interest in system-level programming, 
+              I&apos;m Sushant Negi, a passionate developer with a strong interest in system-level programming, 
               file system analysis, and full-stack web development. I build tools like NTFS file recovery apps
               and AST-based C code plagiarism detectors, and I love combining low-level logic with modern UI 
               frameworks like React and Next.js.
             </p>
             
             <p className="text-lg text-white/80 leading-relaxed">
-              I'm always exploring how things work under the hood and enjoy solving real-world technical challenges.
+              I&apos;m always exploring how things work under the hood and enjoy solving real-world technical challenges.
               My approach combines deep technical knowledge with practical problem-solving to create meaningful solutions.
             </p>
           </div>        </div>
