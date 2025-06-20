@@ -98,11 +98,11 @@ export default function Contact() {
           </div>
           
           {/* Contact Info */}
-          <div className="mt-8 pt-6 border-t border-white/10">
-            <div className="text-center">
-              <h3 className="text-lg font-semibold text-white mb-4">Let's Build Something Amazing Together</h3>
+          <div className="mt-8 pt-6 border-t border-white/10">            
+          <div className="text-center">
+              <h3 className="text-lg font-semibold text-white mb-4">Let&apos;s Build Something Amazing Together</h3>
               <p className="text-white/80 text-sm leading-relaxed">
-                I'm always excited to work on interesting projects and collaborate with passionate people. 
+                I&apos;m always excited to work on interesting projects and collaborate with passionate people. 
                 Whether you have a specific project in mind or just want to chat about technology, feel free to reach out!
               </p>
             </div>
