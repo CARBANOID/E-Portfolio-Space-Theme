@@ -1,0 +1,666 @@
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  cursor: none; /* Hide default cursor for neon effect */
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  overflow-y: auto; /* Ensure vertical scroll works */
+  min-height: 100vh; /* Ensure full viewport height */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Video background styles */
+.video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  object-fit: cover;
+}
+
+/* Ensure content appears above video */
+.content-overlay {
+  position: relative;
+  z-index: 1;
+}
+
+/* Video performance optimizations */
+video {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000;
+}
+
+/* Mobile optimizations for video background */
+@media (max-width: 768px) {
+  .video-background {
+    /* On mobile, optimize video performance */
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+  }
+}
+
+/* Reduced motion: pause video for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  video {
+    animation-play-state: paused !important;
+  }
+}
+
+/* Show default cursor on interactive elements */
+button,
+input,
+select,
+a,
+[role="button"],
+label[for],
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
+/* Cursor animations */
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1.1);
+  }
+}
+
+/* Cursor ring animation classes */
+.cursor-ring-animated {
+  animation: neon-pulse 2s infinite ease-in-out;
+}
+
+.cursor-ring-static {
+  animation: none !important;
+  transform: scale(1) !important;
+  opacity: 0.7 !important;
+}
+
+/* Enhanced neon cursor animations */
+@keyframes neon-pulse {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
+    box-shadow: 0 0 20px currentColor, inset 0 0 20px currentColor;
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.1);
+    box-shadow: 0 0 30px currentColor, inset 0 0 30px currentColor;
+  }
+}
+
+/* Mobile menu fade-in animation */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes neon-twinkle {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.5) rotate(0deg);
+  }
+  25% {
+    opacity: 0.6;
+    transform: scale(1) rotate(90deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2) rotate(180deg);
+  }
+  75% {
+    opacity: 0.6;
+    transform: scale(1) rotate(270deg);
+  }
+}
+
+/* Smooth glow effect */
+@keyframes glow-fade {
+  0%,
+  100% {
+    filter: blur(2px) brightness(1);
+  }
+  50% {
+    filter: blur(3px) brightness(1.2);
+  }
+}
+
+/* Orbital animation for floating particles */
+@keyframes orbit {
+  0% {
+    transform: rotate(0deg) translateX(20px) rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg) translateX(20px) rotate(-360deg);
+  }
+}
+
+/* Smooth transitions for interactive elements */
+a,
+button {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Regular hover effects (keeping these) */
+/* Removed the transform: translateY(-2px) that was applying to all links and buttons */
+
+/* Button glow effects */
+.glow-on-hover {
+  position: relative;
+  overflow: hidden;
+}
+
+.glow-on-hover::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6, #06b6d4, #3b82f6);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.glow-on-hover:hover::before {
+  opacity: 1;
+  animation: glow-rotate 2s linear infinite;
+}
+
+.glow-on-hover:hover {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.4), 0 0 40px rgba(139, 92, 246, 0.2), 0 0 60px rgba(6, 182, 212, 0.1);
+}
+
+@keyframes glow-rotate {
+  0% {
+    background: linear-gradient(45deg, #3b82f6, #8b5cf6, #06b6d4, #3b82f6);
+  }
+  25% {
+    background: linear-gradient(135deg, #8b5cf6, #06b6d4, #3b82f6, #8b5cf6);
+  }
+  50% {
+    background: linear-gradient(225deg, #06b6d4, #3b82f6, #8b5cf6, #06b6d4);
+  }
+  75% {
+    background: linear-gradient(315deg, #3b82f6, #8b5cf6, #06b6d4, #3b82f6);
+  }
+  100% {
+    background: linear-gradient(45deg, #3b82f6, #8b5cf6, #06b6d4, #3b82f6);
+  }
+}
+
+/* Enhanced button hover effects - Disabled to prevent conflicts with glass effects */
+/*
+button:hover,
+.btn:hover,
+a[class*="bg-blue"]:hover,
+a[class*="border"]:hover {
+box-shadow:
+  0 0 15px rgba(59, 130, 246, 0.3),
+  0 0 30px rgba(139, 92, 246, 0.2),
+  0 4px 20px rgba(0, 0, 0, 0.1);
+transform: translateY(-2px) scale(1.02);
+}
+*/
+
+/* Performance optimizations */
+* {
+  will-change: auto;
+}
+
+.cursor-element {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Hide cursor on mobile devices and ensure good performance */
+@media (hover: none) and (pointer: coarse) {
+  body {
+    cursor: auto;
+  }
+
+  /* Hide neon cursor on mobile */
+  .neon-cursor {
+    display: none !important;
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .neon-cursor {
+    display: none !important;
+  }
+}
+
+/* Glassmorphic UI Effects - Maximum translucency for star visibility */
+.glass-card {
+  background: rgba(255, 255, 255, 0.005); /* More transparent */
+  backdrop-filter: blur(3px); /* Slightly more blur */
+  -webkit-backdrop-filter: blur(3px);
+  border: 1px solid rgba(255, 255, 255, 0.05); /* Thinner, more subtle border */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.01);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.01); /* Slightly less transparent on hover */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.02);
+}
+
+/* Glass navbar - Maximum translucency for star visibility */
+.glass-nav {
+  background: rgba(0, 0, 0, 0.01); /* More transparent */
+  backdrop-filter: blur(6px); /* Slightly more blur */
+  -webkit-backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03); /* Thinner, more subtle border */
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* Glass button - Maximum translucency for star visibility */
+.glass-btn {
+  background: rgba(255, 255, 255, 0.01); /* More transparent */
+  backdrop-filter: blur(5px); /* Slightly more blur */
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.06); /* Thinner, more subtle border */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-btn:hover {
+  background: rgba(255, 255, 255, 0.02); /* Slightly less transparent on hover */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  /* Remove transform to prevent animation conflicts */
+}
+
+/* Glass input - Maximum translucency */
+.glass-input {
+  background: rgba(255, 255, 255, 0.01); /* More transparent */
+  backdrop-filter: blur(7px); /* Slightly more blur */
+  -webkit-backdrop-filter: blur(7px);
+  border: 1px solid rgba(255, 255, 255, 0.06); /* Thinner, more subtle border */
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-input:focus {
+  background: rgba(255, 255, 255, 0.03); /* Slightly less transparent on focus */
+  border: 1px solid rgba(59, 130, 246, 0.15);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.03), 0 0 0 2px rgba(59, 130, 246, 0.03);
+  outline: none;
+}
+
+/* Glass footer - Maximum translucency for star visibility */
+.glass-footer {
+  background: rgba(0, 0, 0, 0.02); /* More transparent */
+  backdrop-filter: blur(9px); /* Slightly more blur */
+  -webkit-backdrop-filter: blur(9px);
+  border-top: 1px solid rgba(255, 255, 255, 0.05); /* Thinner, more subtle border */
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Dark mode adjustments - Maximum translucency for star visibility */
+@media (prefers-color-scheme: dark) {
+  .glass-card {
+    background: rgba(0, 0, 0, 0.02); /* More transparent */
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.01);
+  }
+
+  .glass-card:hover {
+    background: rgba(0, 0, 0, 0.04); /* Slightly less transparent on hover */
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.02);
+  }
+
+  .glass-nav {
+    background: rgba(0, 0, 0, 0.05); /* More transparent */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .glass-btn {
+    background: rgba(0, 0, 0, 0.05); /* More transparent */
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  }
+
+  .glass-btn:hover {
+    background: rgba(0, 0, 0, 0.1); /* Slightly less transparent on hover */
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  .glass-input {
+    background: rgba(0, 0, 0, 0.08); /* More transparent */
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .glass-input:focus {
+    background: rgba(0, 0, 0, 0.15); /* Slightly less transparent on focus */
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 0 2px rgba(59, 130, 246, 0.05);
+  }
+
+  .glass-footer {
+    background: rgba(0, 0, 0, 0.04); /* More transparent */
+    border-top: 1px solid rgba(255, 255, 255, 0.03);
+    box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* Enhanced glassmorphic animations - Disabled for better star visibility */
+/*
+@keyframes glass-glow {
+0%, 100% {
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 20px rgba(59, 130, 246, 0.1);
+}
+50% {
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 0 30px rgba(59, 130, 246, 0.2);
+}
+}
+
+.glass-glow {
+animation: none;
+}
+*/
+
+/* Floating animation for glass elements - Disabled for better star visibility */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.glass-float {
+  animation: none; /* Disabled to prevent interference with translucency */
+}
+
+/* Shimmer effect for glass surfaces - Reduced opacity for star visibility */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.glass-shimmer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03) /* Reduced opacity */, transparent);
+  background-size: 200% 100%;
+  animation: shimmer 4s infinite;
+  pointer-events: none;
+}
+
+/* Particle background effect - Mostly disabled for better star visibility */
+.glass-particles {
+  position: relative;
+  overflow-x: hidden; /* Only hide horizontal overflow */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* Hide scrollbar for all scrollable areas */
+*::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+.glass-particles::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* Removed radial gradients for static particles to avoid conflict with shooting stars */
+  background-repeat: repeat;
+  background-size: 250px 150px;
+  opacity: 0.6;
+  animation: none; /* Disabled animation for better star visibility */
+  pointer-events: none;
+}
+
+/* Enhanced mobile responsiveness for glass effects - Ultra-translucent */
+@media (max-width: 768px) {
+  .glass-card,
+  .glass-btn,
+  .glass-nav,
+  .glass-footer {
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.008); /* Slightly more transparent */
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  /* Mobile navigation enhancements */
+  .mobile-nav-overlay {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  /* Enhanced touch targets for mobile */
+  .mobile-nav-item {
+    min-height: 60px;
+    font-size: 1.125rem;
+    font-weight: 500;
+  }
+
+  /* Better tap feedback */
+  .mobile-nav-item:active {
+    transform: scale(0.95);
+    background: rgba(255, 255, 255, 0.08); /* Slightly more transparent */
+  }
+
+  /* Improved hamburger button */
+  .mobile-menu-button {
+    min-height: 48px;
+    min-width: 48px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .glass-card {
+      background: rgba(0, 0, 0, 0.04); /* Slightly more transparent */
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+  }
+}
+
+/* Custom transparent glass styles for maximum star visibility */
+.ultra-transparent {
+  background: rgba(255, 255, 255, 0.005) !important;
+  backdrop-filter: blur(2px) !important;
+  -webkit-backdrop-filter: blur(2px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.04) !important;
+}
+
+/* Hide scrollbar but keep scroll functionality */
+.no-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* Black hole animations */
+@keyframes blackHoleRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes blackHoleCounterRotate {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes blackHolePulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+
+@keyframes gravitationalWave {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.6;
+  }
+}
+
+@keyframes hawkingRadiation {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) translateX(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1) translateX(20px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.3) translateX(40px);
+  }
+}
+
+@keyframes eventHorizonFlicker {
+  0%,
+  100% {
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.9), 0 0 30px rgba(59, 130, 246, 0.4), 0 0 60px rgba(147, 51, 234, 0.3), 0
+      0 100px rgba(59, 130, 246, 0.1);
+  }
+  50% {
+    box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.95), 0 0 40px rgba(59, 130, 246, 0.6), 0 0 80px rgba(147, 51, 234, 0.4),
+      0 0 120px rgba(59, 130, 246, 0.2);
+  }
+}
+
+/* Black hole utility classes */
+.black-hole-container {
+  position: relative;
+  filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.3));
+}
+
+.accretion-disk {
+  animation: blackHoleRotate 8s linear infinite;
+}
+
+.energy-ring-outer {
+  animation: blackHoleRotate 6s linear infinite;
+}
+
+.energy-ring-middle {
+  animation: blackHoleCounterRotate 4s linear infinite;
+}
+
+.energy-ring-inner {
+  animation: blackHoleRotate 2s linear infinite;
+}
+
+.event-horizon {
+  animation: blackHolePulse 4s ease-in-out infinite, eventHorizonFlicker 6s ease-in-out infinite;
+}
+
+.gravitational-lensing {
+  animation: gravitationalWave 6s ease-in-out infinite;
+}
+
+.hawking-particles {
+  animation: blackHoleRotate 15s linear infinite;
+}
+
