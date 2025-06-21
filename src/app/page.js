@@ -237,8 +237,13 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              <h3 className="text-xl font-semibold text-white mb-4">System-Level Expertise</h3>
-              <p className="text-white/80">Deep understanding of file systems, low-level programming, and system architecture.</p>
+            <AnimatedText 
+              el="h3"
+              text="System-Level Expertise"
+              className="text-xl font-semibold mb-3 text-white"
+              once={false}
+            />
+            <p className="text-white/80">Deep understanding of file systems, low-level programming, and system architecture.</p>
             </motion.div>
             <motion.div 
               className="glass-card p-6 rounded-lg text-center"
@@ -246,8 +251,13 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <h3 className="text-xl font-semibold text-white mb-4">Modern Web Development</h3>
-              <p className="text-white/80">Proficient in React, Next.js, and modern web technologies with beautiful UI design.</p>
+            <AnimatedText 
+              el="h3"
+              text="Modern Web Development"
+              className="text-xl font-semibold mb-3 text-white"
+              once={false}
+            />
+            <p className="text-white/80">Proficient in React, Next.js, and modern web technologies with beautiful UI design.</p>
             </motion.div>
             <motion.div 
               className="glass-card p-6 rounded-lg text-center"
@@ -255,8 +265,13 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              <h3 className="text-xl font-semibold text-white mb-4">Problem Solving</h3>
-              <p className="text-white/80">Creative solutions to complex technical challenges with attention to detail.</p>
+            <AnimatedText 
+              el="h3"
+              text="Problem Solving"
+              className="text-xl font-semibold mb-3 text-white"
+              once={false}
+            />
+             <p className="text-white/80">Creative solutions to complex technical challenges with attention to detail.</p>
             </motion.div>
           </div>
         </div>
